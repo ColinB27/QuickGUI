@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from time import sleep
 
         
 class login_page():
@@ -25,16 +26,67 @@ class login_page():
         
     # > Initialise the frame with login features
     def _init_login_frame_(self,master,row,col):
+        self.logged_in = False
+        self.failed_logins = 0
+        
         self.login_frame = ctk.CTkFrame(master=master,corner_radius=6,fg_color="azure")
         self.login_frame.grid(row=row, column=col, sticky="nsew")
+        self.login_frame.grid_rowconfigure((0,1,2,3,4), weight=1)
+        self.login_frame.grid_columnconfigure(0, weight=1)
+        
+        self.username_label = ctk.CTkLabel(self.login_frame,             text="Username :")
+        self.username_input = ctk.CTkEntry(self.login_frame, placeholder_text="Username")
+        self.password_label = ctk.CTkLabel(self.login_frame,             text="Password :")
+        self.password_input = ctk.CTkEntry(self.login_frame, placeholder_text="Password", show="*")
+        self.login_button   = ctk.CTkButton(self.login_frame, text="LOGIN", command=self.login_event,fg_color="green")
+        
+        self.username_label.grid_configure(row=0, column=0, padx=20, sticky= "w")
+        self.username_input.grid_configure(row=1, column=0, padx=20, sticky="ew")
+        self.password_label.grid_configure(row=2, column=0, padx=20, sticky= "w")
+        self.password_input.grid_configure(row=3, column=0, padx=20, sticky="ew")
+        self.login_button.grid_configure(  row=4, column=0, padx=20, sticky="ew")
+        
+        
+    def login_event(self):
+        username_txt = self.username_input.get() # GET USERNAME
+        password_txt = self.password_input.get() # GET PASSWORD
+        if(self.check_login_info(username_txt, password_txt)): #CHECK LOGIN INFO
+            # self.login_button.configure(True,text="DISCONNECT", command=self.disconnect_event,fg_color="red")
+            self.username_input.configure(True, state="disabled")
+            self.password_input.configure(True, state="disabled")
+            self._hide_login_frame_()
+            self.logged_in = True
+        else:
+            self.failed_logins += 1;
     
+    def disconnect_event(self):
+        self.username_input.configure(True, state="normal")
+        self.password_input.configure(True, state="normal")
+        self.password_input.delete(0,"end")
+        # self.login_button.configure(True,text="LOGIN", command=self.login_event,fg_color="green")
+        self.logged_in = False
     
-    # > --------- Quality of life features below     
+    # > --------- Quality of life features below    
+     
+    def check_login_info(self, username, password):
+        return_value = None
+        if(username == "cboule" and password == "dorma"):
+            return_value = True
+        else:
+            return_value = False
+        return return_value
+    
     def _show_login_page_(self):
         self.login_page.grid(row=0, column=0, sticky="nsew")
         
     def _hide_login_page_(self):
         self.login_page.grid_forget()
+    
+    def _show_login_frame_(self,row,col):
+        self.login_frame.grid(row=row, column=col, sticky="nsew")
+        
+    def _hide_login_frame_(self):
+        self.login_frame.grid_forget()
         
 
 if __name__ == "__main__":
