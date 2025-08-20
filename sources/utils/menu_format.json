@@ -1,0 +1,23 @@
+{
+  "File": {
+    "Open": "open_file",
+    "Save": "save_file",
+    "---": "",
+    "Exit": "exit_app"
+  },
+  "Edit": {
+    "Undo": "undo",
+    "Redo": "redo",
+    "---": "",
+    "Cut": "cut",
+    "Copy": "copy",
+    "Paste": "paste"
+  },
+  "View": {
+    "Toggle Dark Mode": "toggle_theme",
+    "Reload Syntax": "reload_syntax"
+  },
+  "Help": {
+    "About": "about"
+  }
+}

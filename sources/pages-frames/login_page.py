@@ -26,32 +26,35 @@ class login_page():
         
     # > Initialise the frame with login features
     def _init_login_frame_(self,master,row,col):
+        #* login related variable
         self.logged_in = False
         self.failed_logins = 0
         
+        #* initialise frame position and inside configuration
         self.login_frame = ctk.CTkFrame(master=master,corner_radius=6,fg_color="azure")
         self.login_frame.grid(row=row, column=col, sticky="nsew")
         self.login_frame.grid_rowconfigure((0,1,2,3,4), weight=1)
         self.login_frame.grid_columnconfigure(0, weight=1)
         
+        #* initialise login frame components
         self.username_label = ctk.CTkLabel(self.login_frame,             text="Username :")
         self.username_input = ctk.CTkEntry(self.login_frame, placeholder_text="Username")
         self.password_label = ctk.CTkLabel(self.login_frame,             text="Password :")
         self.password_input = ctk.CTkEntry(self.login_frame, placeholder_text="Password", show="*")
         self.login_button   = ctk.CTkButton(self.login_frame, text="LOGIN", command=self.login_event,fg_color="green")
         
+        #* position login frame components
         self.username_label.grid_configure(row=0, column=0, padx=20, sticky= "w")
         self.username_input.grid_configure(row=1, column=0, padx=20, sticky="ew")
         self.password_label.grid_configure(row=2, column=0, padx=20, sticky= "w")
         self.password_input.grid_configure(row=3, column=0, padx=20, sticky="ew")
         self.login_button.grid_configure(  row=4, column=0, padx=20, sticky="ew")
         
-        
+    # > verify credentials and update logged_in_value
     def login_event(self):
-        username_txt = self.username_input.get() # GET USERNAME
-        password_txt = self.password_input.get() # GET PASSWORD
-        if(self.check_login_info(username_txt, password_txt)): #CHECK LOGIN INFO
-            # self.login_button.configure(True,text="DISCONNECT", command=self.disconnect_event,fg_color="red")
+        username_txt = self.username_input.get()                
+        password_txt = self.password_input.get()                
+        if(self.check_login_info(username_txt, password_txt)): 
             self.username_input.configure(True, state="disabled")
             self.password_input.configure(True, state="disabled")
             self._hide_login_frame_()
@@ -63,10 +66,8 @@ class login_page():
         self.username_input.configure(True, state="normal")
         self.password_input.configure(True, state="normal")
         self.password_input.delete(0,"end")
-        # self.login_button.configure(True,text="LOGIN", command=self.login_event,fg_color="green")
         self.logged_in = False
     
-    # > --------- Quality of life features below    
      
     def check_login_info(self, username, password):
         return_value = None
