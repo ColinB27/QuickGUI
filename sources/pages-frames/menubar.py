@@ -6,7 +6,7 @@ json_path = "GIT/sources/utils/menu_format.json"
 class MenuBar():
     def _init_menu_bar_(self,path, master, row=0, col=0):
         self.menubar = CTkMenuBar(master=master)
-        self.menubar.grid(row=row, column=col, sticky="ew")  # top row, fill horizontally
+        self.menubar.grid(row=row, column=col, sticky="ew")  
         
         self._init_function_dictionnary_()
         
@@ -25,7 +25,10 @@ class MenuBar():
         
     
     def _init_function_dictionnary_(self):
-        self.menu_functions_map = {}
+        self.menu_functions_map = {
+            "toggle_theme":self.toggle_dark_mode,
+            "exit_app":self.exit_app
+        }
     
     def load_json_menu(self,json_path):
         try:
@@ -40,7 +43,14 @@ if __name__ == "__main__":
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("blue")
     
-    class App(ctk.CTk,MenuBar):
+    class Gf():
+        def toggle_dark_mode(self):
+            ctk.set_appearance_mode("light" if ctk.get_appearance_mode() == "Dark" else "dark")
+            
+        def exit_app(self):
+            self.destroy()  
+    
+    class App(ctk.CTk,MenuBar,Gf):
         def __init__(self):
             super().__init__()
             self._init_window_(1100, 580)
