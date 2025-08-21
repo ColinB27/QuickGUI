@@ -1,12 +1,17 @@
-import customtkinter as ctk
-from time import sleep
+# ============================================================================================================
+# ^ ========================================== INCLUDES
+import os, json, customtkinter as ctk
+from features.general import *
+# ============================================================================================================
 
-        
+
+# ============================================================================================================
+# ^ ========================================== PAGE WITH LOGIN DISPLAY AND SIMPLE USR/PWD LOGIC
 class login_page():
     # > Intialise Login page and places login frame at the center
-    def _init_login_page_(self, rows=3, columns=7, center_weight=3, other_weight=2):
+    def _init_login_page_(self,master, rows=3, columns=7, center_weight=3, other_weight=2):
         #* Main container for login page
-        self.login_page = ctk.CTkFrame(self)
+        self.login_page = ctk.CTkFrame(master=master,bg_color="transparent")
 
         #* Compute the center cell
         center_row = rows // 2
@@ -31,15 +36,15 @@ class login_page():
         self.failed_logins = 0
         
         #* initialise frame position and inside configuration
-        self.login_frame = ctk.CTkFrame(master=master,corner_radius=6,fg_color="azure")
+        self.login_frame = ctk.CTkFrame(master=master,corner_radius=6)
         self.login_frame.grid(row=row, column=col, sticky="nsew")
         self.login_frame.grid_rowconfigure((0,1,2,3,4), weight=1)
         self.login_frame.grid_columnconfigure(0, weight=1)
         
         #* initialise login frame components
-        self.username_label = ctk.CTkLabel(self.login_frame,             text="Username :")
+        self.username_label = ctk.CTkLabel(self.login_frame,             text="Username :",font = get_simple_font("Label"))
         self.username_input = ctk.CTkEntry(self.login_frame, placeholder_text="Username")
-        self.password_label = ctk.CTkLabel(self.login_frame,             text="Password :")
+        self.password_label = ctk.CTkLabel(self.login_frame,             text="Password :",font = get_simple_font("Label"))
         self.password_input = ctk.CTkEntry(self.login_frame, placeholder_text="Password", show="*")
         self.login_button   = ctk.CTkButton(self.login_frame, text="LOGIN", command=self.login_event,fg_color="green")
         
@@ -57,8 +62,10 @@ class login_page():
         if(self.check_login_info(username_txt, password_txt)): 
             self.username_input.configure(True, state="disabled")
             self.password_input.configure(True, state="disabled")
-            self._hide_login_frame_()
             self.logged_in = True
+            self._hide_login_frame_()
+            self._show_app_page_()
+            
         else:
             self.failed_logins += 1;
     
@@ -88,28 +95,5 @@ class login_page():
         
     def _hide_login_frame_(self):
         self.login_frame.grid_forget()
-        
-
-if __name__ == "__main__":
-    ctk.set_appearance_mode("dark")
-    ctk.set_default_color_theme("blue")
-    
-    class App(ctk.CTk,login_page):
-        def __init__(self):
-            super().__init__()
-            self._init_window_(1100, 580)
-            self._init_login_page_()
-        
-        def _init_window_(self, width, height):
-            self.width = width
-            self.height = height
-            # configure window
-            self.title("TEST.py")
-            self.geometry(f"{self.width}x{self.height}")
-
-            self.grid_columnconfigure(0, weight=1)
-            self.grid_rowconfigure(0, weight=1)
-
-    app = App()
-    app.mainloop()
+# ============================================================================================================
     

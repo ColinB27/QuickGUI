@@ -1,8 +1,13 @@
+# ============================================================================================================
+# ^ ========================================== INCLUDES
 import json, os, tkinter as tk, customtkinter as ctk
 from CTkMenuBar import CTkMenuBar, CustomDropdownMenu
+from features.general import *
+# ============================================================================================================
 
-json_path = "GIT/sources/utils/menu_format.json"
 
+# ============================================================================================================
+# ^ ========================================== TOP MENU BAR AND DROPDOWNS
 class MenuBar():
     def _init_menu_bar_(self,path, master, row=0, col=0):
         self.menubar = CTkMenuBar(master=master)
@@ -26,7 +31,7 @@ class MenuBar():
     
     def _init_function_dictionnary_(self):
         self.menu_functions_map = {
-            "toggle_theme":self.toggle_dark_mode,
+            "toggle_theme":toggle_dark_mode,
             "exit_app":self.exit_app
         }
     
@@ -38,15 +43,16 @@ class MenuBar():
         except Exception as e:
             print(e)
             return None
+# ============================================================================================================
 
+
+# ============================================================================================================
+# ^ ========================================== IMPLEMENTATION
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("blue")
     
-    class Gf():
-        def toggle_dark_mode(self):
-            ctk.set_appearance_mode("light" if ctk.get_appearance_mode() == "Dark" else "dark")
-            
+    class Gf(): # stands for generic features
         def exit_app(self):
             self.destroy()  
     
@@ -74,6 +80,7 @@ if __name__ == "__main__":
 
     app = App()
     app.mainloop()
+# ============================================================================================================
     
 
             

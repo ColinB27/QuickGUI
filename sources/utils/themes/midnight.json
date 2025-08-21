@@ -150,7 +150,13 @@
         "family": "Roboto",
         "size": 13,
         "weight": "normal"
+      },
+      "TITLE": {
+        "family": "Roboto",
+        "size": 26,
+        "weight": "normal"
       }
+      
     }
   }
   

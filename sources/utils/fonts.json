@@ -1,0 +1,41 @@
+{
+    "title":{
+        "family" : "Impact",
+        "size"   : 45,
+        "weight" : "bold"
+    },
+    "logo":{
+        "family" : "Impact",
+        "size"   : 35,
+        "weight" : "bold"
+    },
+    "label":{
+        "family" : "Bahnshrift",
+        "size"   : 25,
+        "weight" : "bold"
+    },
+    "body":{
+        "family" : "Bahnshrift",
+        "size"   : 20,
+        "weight" : "normal"
+    },
+    "small":{
+        "family" : "Bahnshrift",
+        "size"   : 15,
+        "weight" : "normal"
+    },
+    "terminal":{
+        "family" : "Courier",
+        "size"   : 15,
+        "weight" : "normal",
+        "slant"  : "roman"
+    },
+    "terminal1":{
+        "family" : "FixedSys",
+        "size"   : 15,
+        "weight" : "normal",
+        "slant"  : "italic",
+        "underline" : false,
+        "overstrike" : false
+    }
+}
