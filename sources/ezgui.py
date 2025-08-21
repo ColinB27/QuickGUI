@@ -7,7 +7,7 @@ from features.general import generic_features as generic
 from pages_frames.login_page import login_page as login
 from pages_frames.app_page import app_page as app
 from pages_frames.menubar import MenuBar as menu
-from pages_frames.code_editor import code_editor_page as code
+# from pages_frames.code_editor import code_editor_page as code
 # ============================================================================================================
  
 
