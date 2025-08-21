@@ -8,7 +8,7 @@ from pages_frames.login_page import login_page as login
 from pages_frames.app_page import app_page as app
 from pages_frames.menubar import MenuBar as menu
 # ============================================================================================================
-
+ 
 
 # ============================================================================================================
 # ^ ========================================== APP
@@ -17,7 +17,9 @@ class ezGUI(ctk.CTk,menu,login,generic,app):
         super().__init__()
         self.app_name = app_name
         self._init_window_(1100, 580)
+        # self._init_app_page_(self)
         self._init_login_page_(self)
+        
     
     def _init_window_(self, width, height):
         self.width = width

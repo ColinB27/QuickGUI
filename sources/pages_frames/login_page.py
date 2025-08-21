@@ -64,7 +64,7 @@ class login_page():
             self.password_input.configure(True, state="disabled")
             self.logged_in = True
             self._hide_login_frame_()
-            self._show_app_page_()
+            self._init_app_page_(self)
             
         else:
             self.failed_logins += 1;
