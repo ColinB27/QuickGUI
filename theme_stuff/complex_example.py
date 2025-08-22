@@ -28,12 +28,18 @@ class App(customtkinter.CTk):
         self.theme_index = 0
         self._init_window()
         
-        
+    def on_closing(self):
+        """ close the program """
+        quit_ = tkinter.messagebox.askokcancel(title="Exit?", message= "Do you want to exit?")
+        if quit_:
+            self.destroy()
+
     def _init_window(self):
 
         # configure window
         self.title("CustomTkinter Theme Switcher")
         self.geometry(f"{1100}x{580}")
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         # theme list and index
         self.themes = list_files_in_path(theme_path)
